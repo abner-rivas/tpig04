@@ -77,8 +77,18 @@ class OfertaController extends Controller
     public function ofertasEstudiantes()
     {
         $ofertas = Oferta::join('users', 'users.id', '=', 'ofertas.id_empresa')
-            ->select('ofertas.*', 'users.name', 'users.direccion', 'users.telefono', 'users.fecha_inicio', 'users.fecha_fin', 'users.fecha_max_aplicar')
-            ->get();
-        return response()->json($ofertas);
+            ->select('ofertas.*', 'users.nombre_empresa', 'users.rubro', 'users.direccion', 'users.telefono', 'users.email')->get();
+
+        return response()->json(['ofertas' => $ofertas]);
+    }
+
+    //Api para obtener una oferta especifica de la base de datos que incluya el nombre de la empresa, rubro, direccion, telefono, email y la oferta
+    public function ofertaEE($id)
+    {
+        $oferta = Oferta::join('users', 'users.id', '=', 'ofertas.id_empresa')
+            ->select('ofertas.*', 'users.nombre_empresa', 'users.rubro', 'users.direccion', 'users.telefono', 'users.email')
+            ->where('ofertas.id', '=', $id)->get();
+
+        return response()->json(['oferta' => $oferta]);
     }
 }

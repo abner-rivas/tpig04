@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Ruta de la API para obtener las ofertas de servicio social
 Route::get('/ofertas_estudiante', [OfertaController::class, 'ofertasEstudiantes']);
+
+//Ruta para obtener una oferta especifica
+Route::get('/ofertas_estudiante/{id}', [OfertaController::class, 'ofertaEE']);

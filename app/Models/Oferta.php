@@ -28,4 +28,9 @@ class Oferta extends Model
     ];
 
     public $timestamps = false;
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_empresa');
+    }
 }
