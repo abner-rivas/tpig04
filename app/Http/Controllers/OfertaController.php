@@ -72,4 +72,13 @@ class OfertaController extends Controller
     {
         return View('ofertas.ofertas_crear');
     }
+
+    //Api para obtener todas las ofertas de la base de datos que incluya el nombre de la empresa, la direccion y el telefono
+    public function ofertasEstudiantes()
+    {
+        $ofertas = Oferta::join('users', 'users.id', '=', 'ofertas.id_empresa')
+            ->select('ofertas.*', 'users.name', 'users.direccion', 'users.telefono', 'users.fecha_inicio', 'users.fecha_fin', 'users.fecha_max_aplicar')
+            ->get();
+        return response()->json($ofertas);
+    }
 }
