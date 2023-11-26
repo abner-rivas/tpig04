@@ -28,6 +28,10 @@ class ApiController extends Controller
             }
         }
     }
+    public function revisar($id)
+    {
+
+    }
 }
 
 

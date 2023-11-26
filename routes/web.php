@@ -55,7 +55,7 @@ Route::middleware(['auth.check'])->group(function () {
 
     Route::controller(ApiController::class)->group(function(){
         Route::get('/postulados','getData')->name('postulados.getData');
-        //Route::put('/postulados/revisar/{id}', 'revisar')->name('postulados.revisar');
+        Route::put('/postulados/revisar/{id}', 'revisar')->name('postulados.revisar');
     });
     
 });
