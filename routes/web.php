@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OfertaController;
 use App\Http\Controllers\PostuladoController;
+use App\Http\Controllers\ApiController;
 
 
 /*
@@ -48,9 +49,13 @@ Route::middleware(['auth.check'])->group(function () {
     });
 
     //Agregar las demas rutas protegidas aquí
-    Route::controller(PostuladoController::class)->group(function(){
-        Route::get('/postulados','consulta')->name('postulados.consulta');
-        Route::put('/postulados/revisar/{id}', 'revisar')->name('postulados.revisar');
+    //Route::controller(PostuladoController::class)->group(function(){
+        //Route::get('/postulados','consulta')->name('postulados.consulta');
+        //Route::put('/postulados/revisar/{id}', 'revisar')->name('postulados.revisar');
+
+    Route::controller(ApiController::class)->group(function(){
+        Route::get('/postulados','getData')->name('postulados.getData');
+        //Route::put('/postulados/revisar/{id}', 'revisar')->name('postulados.revisar');
     });
     
 });
