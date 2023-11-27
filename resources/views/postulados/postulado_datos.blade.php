@@ -19,6 +19,19 @@
                                 <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="id" type="text" value="{{ $detalle['_id'] }}" readonly>
                             </div>
 
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="usuario">
+                                    Usuario
+                                </label>
+                                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="usuario" type="text" value="{{ $detalle['user'] }}" readonly>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="texto">
+                                    Texto
+                                </label>
+                                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="texto" type="text" value="{{ $detalle['text'] }}" readonly>
+                            </div>
                         </form>
                     @else
                         <p>No se encontraron detalles para mostrar.</p>

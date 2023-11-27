@@ -30,23 +30,27 @@ class ApiController extends Controller
     }
     public function revisar($id)
     {
-        $client = new Client([
-            'verify' => false, // Ignorar la verificación del certificado SSL
-        ]);
+    $client = new Client([
+        'verify' => false, // Ignorar la verificación del certificado SSL
+    ]);
 
-        try {
-            $response = $client->get("https://cat-fact.herokuapp.com/facts/{$id}"); // Haces una solicitud usando el ID obtenido
-            $detalle = json_decode($response->getBody(), true);
+    try {
+        $response = $client->get("https://cat-fact.herokuapp.com/facts");
+        $data = json_decode($response->getBody(), true);
 
-            // Retorna una vista con los detalles obtenidos
-            return view('postulados.postulado_datos', ['detalle' => $detalle]);
-        } catch (\Exception $e) {
-            // Manejar errores, por ejemplo, mostrando un mensaje de error
-            if (view()->exists('error')) {
-                return view('error', ['message' => $e->getMessage()]);
-            } else {
-                return $e->getMessage(); // Si la vista 'error' no existe, muestra solo el mensaje de error en texto plano
-            }
+        // Busca el detalle correspondiente al ID en los datos obtenidos
+        $detalle = collect($data)->firstWhere('_id', $id);
+
+        // Retorna una vista con los detalles obtenidos
+        return view('postulados.postulado_datos', ['detalle' => $detalle]);
+    } catch (\Exception $e) {
+        // Manejar errores, por ejemplo, mostrando un mensaje de error
+        if (view()->exists('error')) {
+            return view('error', ['message' => $e->getMessage()]);
+        } else {
+            return $e->getMessage(); // Si la vista 'error' no existe, muestra solo el mensaje de error en texto plano
         }
     }
+    }
+
 }
