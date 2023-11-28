@@ -1,85 +1,51 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Detalles del Registro') }}
+            {{ __('Ofertas') }}
         </h2>
     </x-slot>
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-
-                    @if(isset($detalle))
-                        <form>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="id">
-                                    ID
-                                </label>
-                                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="id" type="text" value="{{ $detalle['_id'] }}" readonly>
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="usuario">
-                                    Usuario
-                                </label>
-                                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="usuario" type="text" value="{{ $detalle['user'] }}" readonly>
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="texto">
-                                    Texto
-                                </label>
-                                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="texto" type="text" value="{{ $detalle['text'] }}" readonly>
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="estado">
-                                    Estado
-                                </label>
-                                @if($detalle['__v'] == 0)
-                                    <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="estado" type="text" value="no aprobado" readonly>
-                                @elseif($detalle['__v'] == 1)
-                                    <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="estado" type="text" value="aprobado" readonly>
+    <div class="py-12">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    {{ __("Tus ofertas") }}
+                </div>
+                <div class="p-1 text-gray-900 dark:text-gray-100">
+                    <div class="md:w-[100%] w-auto p-4 mx-auto bg-slate-50 dark:bg-gray-800 shadow rounded-md overflow-auto">
+                        <table class="table w-full max-h-screen rounded-md">
+                            <thead class="border-b bg-slate-100 dark:bg-gray-700">
+                                <tr class="text-center">
+                                    <th class="px-6 py-4 text-xs text-gray-500 font-semibold">CODIGO</th>
+                                    <th class="px-6 py-4 text-xs text-gray-500 font-semibold">CARERAS SOLI.</th>
+                                    <th class="px-6 py-4 text-xs text-gray-500 font-semibold">CANT. ESTUDIANTES</th>
+                                    <th class="px-6 py-4 text-xs text-gray-500 font-semibold">PUESTO</th>
+                                    <th class="px-6 py-4 text-xs text-gray-500 font-semibold">SALARIO</th>
+                                    <th class="px-6 py-4 text-xs text-gray-500 font-semibold">FECHA PARA APLICAR</th>
+                                    <th class="px-6 py-4 text-xs text-gray-500 font-semibold">ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($ofertas) && is_array($ofertas) && count($ofertas) > 0)
+                                    @foreach ($ofertas as $oferta)
+                                        <tr>
+                                            <!-- Mostrar cada detalle de la oferta en las celdas de la tabla -->
+                                            <td>{{ $oferta['property_1'] }}</td>
+                                            <td>{{ $oferta['property_2'] }}</td>
+                                            <!-- Agrega más propiedades según la estructura de tus datos -->
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="7">No hay postulantes da esta oferta</td>
+                                    </tr>
                                 @endif
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="source">
-                                    Source
-                                </label>
-                                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="source" type="text" value="{{ $detalle['source'] }}" readonly>
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="type">
-                                    Type
-                                </label>
-                                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="type" type="text" value="{{ $detalle['type'] }}" readonly>
-                            </div>
-                            <div >
-                                <div class="inline-block">
-                                    <td class="text-center p-1 text-white">
-                                        <a href="#">
-                                            <button type="button" class="text-black bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Aprobar</button>
-                                        </a>
-                                    </td>
-                                </div>
-                                <div class="inline-block">
-                                    <td class="text-center p-1 text-white">
-                                        <a href="#">
-                                            <button type="button" class="text-black bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Denegar</button>
-                                        </a>
-                                    </td>
-                                </div>
-                            </div>
-                        </form>
-                    @else
-                        <p>No se encontraron detalles para mostrar.</p>
-                    @endif
-
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
+
