@@ -30,8 +30,9 @@
                                     @foreach ($ofertas as $oferta)
                                         <tr>
                                             <!-- Mostrar cada detalle de la oferta en las celdas de la tabla -->
-                                            <td>{{ $oferta['property_1'] }}</td>
-                                            <td>{{ $oferta['property_2'] }}</td>
+                                            <td class="text-center p-1 text-white">{{ $ofertas['_id'] }}</td>
+                                            <td class="text-center p-1 text-white">{{ $ofertas['user'] }}</td>
+                                            <td class="text-center p-1 text-white">{{$ofertas['__v']}}
                                             <!-- Agrega más propiedades según la estructura de tus datos -->
                                         </tr>
                                     @endforeach
