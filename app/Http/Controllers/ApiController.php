@@ -15,11 +15,11 @@ class ApiController extends Controller
         ]);
 
         try {
-            $response = $client->get('https://cat-fact.herokuapp.com/facts');
+            $response = $client->get('https://deploytpi-fce1a5511732.herokuapp.com/apicurriculum');
             $data = json_decode($response->getBody(), true);
 
             // Retorna la vista con los datos
-            return view('postulados.postulados_consulta', ['catFacts' => $data]);
+            return view('postulados.postulados_consulta', ['postfact' => $data]);
         } catch (RequestException $e) {
             if (view()->exists('error')) {
                 return view('error', ['message' => $e->getMessage()]);
@@ -35,9 +35,9 @@ class ApiController extends Controller
         ]);
 
         try {
-            $response = $client->get("https://cat-fact.herokuapp.com/facts");
+            $response = $client->get("https://deploytpi-fce1a5511732.herokuapp.com/apicurriculum");
             $data = json_decode($response->getBody(), true);
-            $ofertas = collect($data)->firstWhere('_id', $id);
+            $ofertas = collect($data)->firstWhere('id', $id);
             return view('postulados.postulado_datos', ['ofertas' => $ofertas]);
 
         } catch (\Exception $e) {
