@@ -46,6 +46,8 @@ Route::middleware(['auth.check'])->group(function () {
         Route::get('/ofertas', 'index')->name('ofertas.index');
         Route::post('/ofertas', 'store')->name('ofertas.store');
         Route::get('/ofertas/crear', 'create')->name('ofertas.crear');
+        Route::get('/ofertas/revisar/{oferta}', 'revisar')->name('ofertas.revisar');
+        
     });
 
     //Agregar las demas rutas protegidas aquí
